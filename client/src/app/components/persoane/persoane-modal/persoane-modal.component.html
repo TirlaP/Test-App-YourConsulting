@@ -1,0 +1,146 @@
+<h1>{{ id_person }}</h1>
+
+<div class="modal-header">
+  <h4 class="modal-title">
+    {{ id_person ? "Modificare" : "Adăugare" }} informație
+  </h4>
+</div>
+
+<div class="modal-body">
+  <div class="row">
+    <label class="col-2 control-label">Nume*</label>
+    <div class="col-9">
+      <input
+        id="nume"
+        name="nume"
+        [(ngModel)]="modal.nume"
+        class="form-control"
+        placeholder="Nume..."
+        maxlength="255"
+        required="true"
+        #nume="ngModel"
+      />
+      <div
+        *ngIf="nume.invalid && (nume.dirty || nume.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="nume.errors?.['required']">
+          Trebuie sa introduceti numele.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <label class="col-2 control-label">Prenume*</label>
+    <div class="col-9">
+      <input
+        id="prenume"
+        name="prenume"
+        [(ngModel)]="modal.prenume"
+        class="form-control"
+        placeholder="Prenume..."
+        maxlength="255"
+        required="true"
+        #prenume="ngModel"
+      />
+      <div
+        *ngIf="prenume.invalid && (prenume.dirty || prenume.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="prenume.errors?.['required']">
+          Trebuie sa introduceti prenumele.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <label class="col-2 control-label">CNP* </label>
+    <div class="col-3">
+      <input
+        required="true"
+        type="text"
+        id="cnp"
+        name="cnp"
+        [(ngModel)]="modal.cnp"
+        (ngModelChange)="createAge()"
+        class="form-control"
+        placeholder="CNP..."
+        minlength="13"
+        maxlength="13"
+        #cnp="ngModel"
+      />
+      <div
+        *ngIf="cnp.invalid && (cnp.dirty || cnp.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="cnp.errors?.['required']">Trebuie sa introduceti CNP.</div>
+        <div *ngIf="cnp.errors?.['minlength']">
+          CNP must be 13 characters long.
+        </div>
+      </div>
+    </div>
+    <label class="col-2 control-label">Varsta</label>
+    <div class="col-3">
+      <input
+        [readonly]="true"
+        type="text"
+        [(ngModel)]="modal.age"
+        class="form-control"
+        placeholder="Varsta..."
+        pattern="\d*"
+        maxlength="3"
+      />
+    </div>
+  </div>
+
+  <div class="row">
+    <label class="col-2 control-label">Masina detinuta</label>
+    <div class="col-4">
+      <ng-select
+        id="car"
+        name="car"
+        [items]="cars"
+        bindLabel="marca"
+        bindValue="id"
+        (change)="getCar()"
+        [multiple]="true"
+        placeholder="Select cars..."
+        [(ngModel)]="modal.selectedcars"
+        required="true"
+        #car="ngModel"
+      >
+      </ng-select>
+      <div
+        *ngIf="car.invalid && (car.dirty || car.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="car.errors?.['required']">
+          Trebuie sa alegeti cel putin un model de masina.
+        </div>
+      </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <p>Selected cars: {{ modal.selectedcars }}</p>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    (click)="activeModal.dismiss()"
+  >
+    Renunță
+  </button>
+  <button
+    type="button"
+    class="btn btn-success"
+    (click)="save()"
+    [disabled]="nume.invalid || prenume.invalid || cnp.invalid || car.invalid"
+  >
+    Salvează
+  </button>
+</div>

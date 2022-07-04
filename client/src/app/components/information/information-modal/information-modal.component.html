@@ -1,0 +1,81 @@
+<h1>{{ id_information }}</h1>
+
+<div class="modal-header">
+  <h4 class="modal-title">
+    {{ id_information ? "Modificare" : "Adăugare" }} informație
+  </h4>
+</div>
+
+<div class="modal-body">
+  <div class="row">
+    <label class="col-2 control-label">Denumire*</label>
+    <div class="col-9">
+      <input
+        id="name"
+        name="name"
+        type="text"
+        [(ngModel)]="modal.name"
+        class="form-control"
+        placeholder="Denumire..."
+        maxlength="200"
+        required="true"
+        #name="ngModel"
+      />
+      <div
+        *ngIf="name.invalid && (name.dirty || name.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="name.errors?.['required']">
+          Trebuie sa introduceti denumirea informatiei.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <label class="col-2 control-label">Tip*</label>
+    <div class="col-4">
+      <input
+        id="tip"
+        name="tip"
+        type="number"
+        [(ngModel)]="modal.type"
+        class="form-control"
+        placeholder="Tip..."
+        maxlength="2"
+        required="true"
+        #tip="ngModel"
+      />
+      <div
+        *ngIf="tip.invalid && (tip.dirty || tip.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="tip.errors?.['required']">
+          Trebuie sa introduceti tipul informatiei (Ex: 1, 5).
+        </div>
+      </div>
+    </div>
+    <div class="col-1">
+      <input
+        type="checkbox"
+        [checked]="modal.liked"
+        class="form-check-input float-end"
+        [(ngModel)]="modal.liked"
+      />
+    </div>
+    <label class="col-5 p-2 text-start">Apreciat</label>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    (click)="activeModal.dismiss()"
+  >
+    Renunță
+  </button>
+  <button type="button" class="btn btn-success" (click)="save()">
+    Salvează
+  </button>
+</div>

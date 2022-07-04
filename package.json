@@ -1,0 +1,43 @@
+{
+  "name": "test-app",
+  "version": "1.0.0",
+  "description": "Your Consulting homework",
+  "main": "./server/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd client/ && npm install && ng build --prod --aot",
+    "start": "node server/app.js",
+    "dev": "nodemon server/app.js",
+    "preinstall": "npm i -g @angular/cli"
+  },
+  "author": "Virvara Alexandru",
+  "license": "ISC",
+  "dependencies": {
+    "@ng-select/ng-select": "^8.3.0",
+    "@types/node": "^17.0.40",
+    "ag-grid-angular": "^27.3.0",
+    "ag-grid-community": "^27.3.0",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-timeout-handler": "^2.2.2",
+    "helmet": "^5.1.0",
+    "konfig": "^0.2.1",
+    "lodash": "^4.17.21",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.3",
+    "ng2-search-filter": "^0.5.1",
+    "node": "^17.7.2",
+    "nodemon": "^2.0.16",
+    "pg": "^8.7.3",
+    "phantom": "^6.3.0",
+    "sequelize": "^6.20.1",
+    "socket.io": "^4.5.1",
+    "socket.io-redis": "^6.1.1",
+    "swag": "^0.7.0"
+  },
+  "devDependencies": {
+    "with-env": "^1.0.0"
+  }
+}

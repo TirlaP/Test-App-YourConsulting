@@ -1,0 +1,137 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    {{ id_car ? "Modificare" : "Adăugare" }} informație
+  </h4>
+</div>
+
+<div class="modal-body">
+  <div class="row">
+    <label class="col-2 control-label">Denumire marca*</label>
+    <div class="col-9">
+      <input
+        id="marca"
+        name="marca"
+        [(ngModel)]="modal.marca"
+        class="form-control"
+        placeholder="Marca..."
+        maxlength="255"
+        required="true"
+        #marca="ngModel"
+      />
+      <div
+        *ngIf="marca.invalid && (marca.dirty || marca.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="marca.errors?.['required']">
+          Trebuie sa introduceti marca masinii.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <label class="col-2 control-label">Denumire model*</label>
+    <div class="col-9">
+      <input
+        id="model"
+        name="model"
+        [(ngModel)]="modal.model"
+        class="form-control"
+        placeholder="Model..."
+        maxlength="255"
+        required="true"
+        #model="ngModel"
+      />
+      <div
+        *ngIf="model.invalid && (model.dirty || model.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="model.errors?.['required']">
+          Trebuie sa introduceti modelul masinii.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <label class="col-2 control-label">Anul fabricatiei*</label>
+    <div class="col-4">
+      <input
+        id="fabricatie"
+        name="fabricatie"
+        type="number"
+        [(ngModel)]="modal.fabricatie"
+        class="form-control"
+        placeholder="An fabricatie..."
+        maxlength="2"
+        required="true"
+        #fabricatie="ngModel"
+      />
+      <div
+        *ngIf="fabricatie.invalid && (fabricatie.dirty || fabricatie.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="fabricatie.errors?.['required']">
+          Trebuie sa introduceti anul fabricatiei.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <label class="col-2 control-label">Capacitate cilindrica*</label>
+    <div class="col-4">
+      <input
+        id="capacitate"
+        name="capacitate"
+        type="number"
+        [(ngModel)]="modal.capacitate"
+        (ngModelChange)="createTax()"
+        class="form-control"
+        placeholder="Capacitate..."
+        maxlength="2"
+        required="true"
+        #capacitate="ngModel"
+      />
+      <div
+        *ngIf="capacitate.invalid && (capacitate.dirty || capacitate.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="capacitate.errors?.['required']">
+          Trebuie sa introduceti capacitatea cilindrica (Ex: 1000, 2000).
+        </div>
+      </div>
+    </div>
+    <label class="col-2 control-label">Taxa de impozit</label>
+    <div class="col-3">
+      <input
+        [readonly]="true"
+        type="number"
+        [(ngModel)]="modal.taxa"
+        class="form-control"
+        placeholder="Taxa..."
+        maxlength="2"
+      />
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    (click)="activeModal.dismiss()"
+  >
+    Renunță
+  </button>
+  <button
+    type="button"
+    class="btn btn-success"
+    (click)="save()"
+    [disabled]="
+      marca.invalid || model.invalid || fabricatie.invalid || capacitate.invalid
+    "
+  >
+    Salvează
+  </button>
+</div>
